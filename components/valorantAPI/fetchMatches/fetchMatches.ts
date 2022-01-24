@@ -9,6 +9,7 @@ async function fetchMatches (
     map?: string
     ) {
     const matches = await ValorantAPI.getMatches(region, name, tag, size, mode, map)
+    console.log(matches)
     return matches
 }
 

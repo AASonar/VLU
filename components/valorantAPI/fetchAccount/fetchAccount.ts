@@ -1,6 +1,6 @@
 import { ValorantAPI } from '../valorantAPI';
 
-interface AccountDetails {
+export interface AccountDetails {
     name: string,
     region: string,
     tag: string,

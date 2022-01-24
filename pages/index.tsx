@@ -1,15 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { fetchMatches } from '../components/valorantAPI'
-import { fetchAccount } from '../components/valorantAPI'
+import { fetchAccount } from '../components/valorantAPI/'
 import React, { useEffect, useState } from "react";
+import { AccountDetails } from '../components/valorantAPI/fetchAccount/fetchAccount';
 
 const Home: NextPage = () => {
   
-  const player = fetchAccount("FrozenSonar", "8838")
-  
+  const [playerInfo, setplayerInfo] = useState<AccountDetails>()
+  const [matchesInfo, setmatchInfo] = useState<any>()
+
+  useEffect( () => {
+    fetchAccount("FrozenSonar", "8838").then((accountDetails: AccountDetails) => {
+      setplayerInfo(accountDetails)
+    })
+
+   /* fetchMatches("ap", "FrozenSonar", "8838", "10", null).then((matchDetails: any) => {
+      setMatchDeets(matchDetails)
+    }) */
+
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -22,9 +36,9 @@ const Home: NextPage = () => {
         <>
           <p>Nice one dong</p>
           
-          <p>{JSON.stringify(player)}</p>
+          <p>{JSON.stringify(playerInfo?.name)}</p>
         
-          <p> {JSON.stringify(fetchMatches("ap", "FrozenSonar", "8838", "10", null))}</p> 
+          <p> {}</p> 
           
         </>
       </main>
