@@ -12,7 +12,7 @@ const fetchMatches = async (
 
     const response = await ValorantAPI.getMatches(region, name, tag, size, mode, map)
     const { data }  = await response
-    console.log(data)
+    //console.log(data)
     return data
 
 }

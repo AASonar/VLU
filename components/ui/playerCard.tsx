@@ -24,21 +24,17 @@ export default function PlayerCard(props: PlayerCardProps) {
   
     const [playerInfo, setplayerInfo] = useState<AccountDetails>()
     const [mmrInfo, setmmrInfo] = useState<MMRDetails>()
-    const [matchesInfo, setmatchInfo] = useState<any>()
   
     useEffect( () => {
       fetchAccount(accInfo[0], accInfo[1]).then((accountDetails: AccountDetails) => {
         setplayerInfo(accountDetails)
       })
   
+      //TODO: change region to dynamic
       fetchMMR("v1", "ap", accInfo[0], accInfo[1]).then((mmrDetails: MMRDetails) => {
         setmmrInfo(mmrDetails)
       })
 
-     fetchMatches("ap", props.userName, props.tag, "10", null).then((matchDetails: any) => {
-        setmatchInfo(matchDetails)
-      })
-  
     }, [])
 
     const card  = playerInfo?.card?.large
@@ -48,7 +44,7 @@ export default function PlayerCard(props: PlayerCardProps) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="600"
+          height="400"
           image= {card}
           alt="player card picture"
         />

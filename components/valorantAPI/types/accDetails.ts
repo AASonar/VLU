@@ -1,12 +1,4 @@
 
-/*
-interface Card {
-    id: string
-    small: string
-    large: string
-    wide: string
-} */
-
 type Card = {
     id: string
     small: string

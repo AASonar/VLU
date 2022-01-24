@@ -10,7 +10,7 @@ const fetchMMR = async (
 
     const response = await ValorantAPI.getMMR(version, region, name, tag)
     const { data }  = await response
-    console.log(data)
+    //console.log(data)
     return data
 }
 
