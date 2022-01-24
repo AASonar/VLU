@@ -4,7 +4,13 @@ export interface AccountDetails {
     name: string,
     region: string,
     tag: string,
-    card: Object
+    account_level: number
+    card: {
+        id: string
+        small: string
+        large: string
+        wide: string
+    }
 }
 
 const fetchAccount = async (name: string, tag: string): Promise<AccountDetails> => {
