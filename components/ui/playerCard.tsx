@@ -2,25 +2,40 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, ListItem, ListItemText } from '@mui/material';
 import React, { useEffect, useState } from "react";
-import fetchAccount, { AccountDetails } from '../valorantAPI/fetchAccount/fetchAccount';
+import fetchAccount from '../valorantAPI/fetchAccount/fetchAccount';
 import { fetchMatches } from '../valorantAPI';
+import '@fontsource/roboto/400.css';
+import fetchMMR from '../valorantAPI/fetchMMR/fetchMMR';
+import { List } from '@mui/material';
+import { MMRDetails } from '../valorantAPI/types/mmrDetails';
+import { AccountDetails } from '../valorantAPI/types/accDetails';
 
-export default function PlayerCard() {
+interface PlayerCardProps {
+  userName: string,
+  tag: string
+}
 
-    const accInfo = ["FrozenSonar", "8838"]
-    const accInfo2 = ["FrozenSonar", "8838"]
+
+export default function PlayerCard(props: PlayerCardProps) {
+
+    const accInfo = [props.userName, props.tag]
   
     const [playerInfo, setplayerInfo] = useState<AccountDetails>()
+    const [mmrInfo, setmmrInfo] = useState<MMRDetails>()
     const [matchesInfo, setmatchInfo] = useState<any>()
   
     useEffect( () => {
-      fetchAccount(accInfo2[0], accInfo2[1]).then((accountDetails: AccountDetails) => {
+      fetchAccount(accInfo[0], accInfo[1]).then((accountDetails: AccountDetails) => {
         setplayerInfo(accountDetails)
       })
   
-     fetchMatches("ap", "FrozenSonar", "8838", "10", null).then((matchDetails: any) => {
+      fetchMMR("v1", "ap", accInfo[0], accInfo[1]).then((mmrDetails: MMRDetails) => {
+        setmmrInfo(mmrDetails)
+      })
+
+     fetchMatches("ap", props.userName, props.tag, "10", null).then((matchDetails: any) => {
         setmatchInfo(matchDetails)
       })
   
@@ -29,22 +44,25 @@ export default function PlayerCard() {
     const card  = playerInfo?.card?.large
     
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 300 }}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="600"
           image= {card}
-          alt="green iguana"
+          alt="player card picture"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {playerInfo?.name}
+            {playerInfo?.name}#{playerInfo?.tag}
           </Typography>
           <Typography display="block" variant="body2" color="text.secondary">
-            Player Tag:#{playerInfo?.tag}
-            Region: {playerInfo?.region}
-            Account Level: {playerInfo?.account_level}
+            <List>
+              <ListItemText>Region: {playerInfo?.region}</ListItemText>
+              <ListItemText>Account Level: {playerInfo?.account_level}</ListItemText>
+              <ListItemText>Rank: {mmrInfo?.currenttierpatched}</ListItemText>
+              <ListItemText>Elo: {mmrInfo?.elo} ({mmrInfo?.mmr_change_to_last_game}) </ListItemText>
+            </List>
           </Typography>
         </CardContent>
       </CardActionArea>

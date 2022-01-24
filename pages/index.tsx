@@ -3,23 +3,30 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { fetchMatches } from '../components/valorantAPI'
-import { fetchAccount } from '../components/valorantAPI/'
-import React, { useEffect, useState } from "react";
-import { AccountDetails } from '../components/valorantAPI/fetchAccount/fetchAccount';
+import React from "react";
 import PlayerCard from '../components/ui/playerCard';
+import { Container, Grid } from '@mui/material';
 
 
 const Home: NextPage = () => {
   
   return (
-    
+ 
       <main className={styles.main}>
-        <PlayerCard />
-        <>
-          <p>Nice one dong</p>
+        <Container>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <PlayerCard userName={"Kaizen"} tag={"sage"} /> 
+            </Grid>
+            <Grid item xs={4}>
+              <PlayerCard userName={"Kaiserin"} tag={"9988"}  />
+            </Grid>
+
+          </Grid>
           
-        </>
+        </Container>
+        
+
       </main>
 
   )
