@@ -8,7 +8,8 @@ interface UserContextProps  {
   setError?(error:Error): void
   sbOpen?: boolean
   setSbOpen?(sbOpen:boolean): void
-  isPlayerInfoValid?: boolean
+  sbErrorOpen?: boolean
+  setSbErrorOpen?(sbErrorOpen:boolean): void
 }
 
 export const UserContext = createContext<UserContextProps>({});
