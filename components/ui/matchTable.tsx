@@ -7,15 +7,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { MatchDetails, Metadata } from '../valorantAPI/types/matchDetails';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { fetchMatches } from '../valorantAPI';
 import fetchMatch from '../valorantAPI/fetchMatch/fetchMatch';
 import { PlayerCardProps } from '../valorantAPI/types/accDetails';
+import { UserContext } from '../UserContext';
 
 export default function BasicTable({playerInfo}: PlayerCardProps) {
 
+    const { 
+      error, 
+      setError,
+    } = useContext(UserContext);
+
     const [matchDetails, setMatchDetails] = useState<MatchDetails>([]);
-    const [error, setError] = useState<Error>();
 
     useEffect(() => {
       console.log(playerInfo);
@@ -25,7 +30,7 @@ export default function BasicTable({playerInfo}: PlayerCardProps) {
         setMatchDetails(matchDetails)
        }).catch((err: Error) => {
          console.log("error", err)
-         setError(err)
+         setError!(err)
        })
 
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */
@@ -50,7 +55,8 @@ export default function BasicTable({playerInfo}: PlayerCardProps) {
               key={matchid}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row" sx={{maxWidth: 100, overflow: "hidden", textOverflow: "ellipsis"}}>
+              <TableCell component="th" scope="row" 
+              sx={{maxWidth: 100, overflow: "hidden", textOverflow: "ellipsis"}}>
                 {matchid}
               </TableCell>
               <TableCell align="right">{map}</TableCell>

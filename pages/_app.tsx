@@ -2,38 +2,32 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import React, { createContext, useContext, useEffect, useState, useMemo} from 'react'
 import { fetchAccount } from '../components/valorantAPI';
-import { AccountDetails } from '../components/valorantAPI/types/accDetails';
+import { AccountDetails, UserInfo } from '../components/valorantAPI/types/accDetails';
 import { UserContext } from '../components/UserContext';
 
-const userInfo = {
-  name: "Kaiserin",
-  tag: "9988s"
-}
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-  const [playerInfo, setPlayerInfoState] = useState<AccountDetails>(Object);
-  const [error, setError] = useState<Error>();
-  const [isPlayerInfoValid, setIsPlayerInfoValid] = useState<boolean>(false);
+  const [playerInfo, setPlayerInfoState] = useState<AccountDetails>(Object)
+  const [error, setError] = useState<Error>()
+  const [isPlayerInfoValid, setIsPlayerInfoValid] = useState<boolean>(false)
+  const [sbOpen, setSbOpen] = useState<boolean>()
 
   const setPlayerInfo = (acctDetails: AccountDetails) => {
-    setPlayerInfoState(acctDetails);
-    setIsPlayerInfoValid(true);
+    setPlayerInfoState(acctDetails)
+    setIsPlayerInfoValid(true)
   }
 
-  useEffect(() => {
-    fetchAccount(userInfo.name, userInfo.tag).then(
-      (accountDetails: AccountDetails) => {
-        setPlayerInfo(accountDetails)
-      }).catch((err: Error) => {
-        console.log("error", err);
-        setError(error);
-      })
-
-  }, []);
-
   return (
-    <UserContext.Provider value={{playerInfo, setPlayerInfo, error, isPlayerInfoValid}}>
+    <UserContext.Provider value={{
+        playerInfo, 
+        setPlayerInfo, 
+        error, 
+        setError, 
+        sbOpen,
+        setSbOpen,
+        isPlayerInfoValid 
+      }}>
       <Component {...pageProps} /> 
     </UserContext.Provider>
   )

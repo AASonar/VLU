@@ -14,14 +14,21 @@ export default function CustomizedSnackbars() {
 
 const { 
     error, 
+    sbOpen,
+    setSbOpen,
     isPlayerInfoValid
     } = useContext(UserContext);
     
-
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
-    setOpen(true);
+    setOpen(true)
+  };
+
+  const handleValidPlayerInfo= () => {
+    if (isPlayerInfoValid) {
+        return setOpen(true)
+    }
   };
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -30,23 +37,20 @@ const {
     }
 
     setOpen(false);
+    setSbOpen!(false);
   };
-
-
 
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
 
-    { isPlayerInfoValid && 
-     <Snackbar open={isPlayerInfoValid} autoHideDuration={6000} onClose={handleClose}>
+     <Snackbar open={sbOpen} autoHideDuration={5000} onClose={handleClose}>
          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Player Info Confirmed!
         </Alert>
       </Snackbar> 
-      }
-
+      
     { error && 
-     <Snackbar open={!isPlayerInfoValid} autoHideDuration={6000} onClose={handleClose}>
+     <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           Encountered error: {error}
         </Alert>

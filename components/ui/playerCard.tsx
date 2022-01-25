@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, ListItem, ListItemText } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import fetchAccount from "../valorantAPI/fetchAccount/fetchAccount";
 import { fetchMatches } from "../valorantAPI";
 import "@fontsource/roboto/400.css";
@@ -11,14 +11,18 @@ import fetchMMR from "../valorantAPI/fetchMMR/fetchMMR";
 import { List } from "@mui/material";
 import { MMRDetails } from "../valorantAPI/types/mmrDetails";
 import { AccountDetails, PlayerCardProps } from "../valorantAPI/types/accDetails";
-import useContext from 'react';
+import { UserContext } from "../UserContext";
 
 
 export default function PlayerCard({playerInfo}: PlayerCardProps) {
 
-  const [mmrInfo, setmmrInfo] = useState<MMRDetails>();
-  const [error, setError] = useState<Error>();
+  const { 
+    error, 
+    setError,
+  } = useContext(UserContext);
 
+  const [mmrInfo, setmmrInfo] = useState<MMRDetails>();
+  
   useEffect(() => {
     
     //TODO: change region to dynamic
@@ -27,7 +31,7 @@ export default function PlayerCard({playerInfo}: PlayerCardProps) {
         setmmrInfo(mmrDetails)
       }).catch((err: Error) => {
         console.log("error", err)
-        setError(err)
+        setError!(err)
       })
 
   }, [])
