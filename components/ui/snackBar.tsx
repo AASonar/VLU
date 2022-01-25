@@ -16,19 +16,23 @@ const {
     error, 
     sbOpen,
     setSbOpen,
-    isPlayerInfoValid
+    sbErrorOpen,
+    setSbErrorOpen
     } = useContext(UserContext);
     
-  const [open, setOpen] = useState(false);
-
- 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
-    setSbOpen!(false);
+    if(sbOpen) {
+        setSbOpen!(false);
+    }
+    
+    if(sbErrorOpen) {
+        setSbErrorOpen!(false);
+    }
+    
   };
 
   return (
@@ -40,13 +44,11 @@ const {
         </Alert>
       </Snackbar> 
       
-    { error && 
-     <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+     <Snackbar open={sbErrorOpen} autoHideDuration={5000} onClose={handleClose}>
          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-          Encountered error: {error}
+          Encountered error: {JSON.stringify(error)}
         </Alert>
       </Snackbar> 
-      }
 
     </Stack>
   );

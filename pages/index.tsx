@@ -14,8 +14,7 @@ const Home: NextPage = () => {
     playerInfo, 
     setPlayerInfo, 
     error, 
-    setError,
-    isPlayerInfoValid
+    setError
   } = useContext(UserContext);
 
   return (

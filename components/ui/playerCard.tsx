@@ -31,7 +31,9 @@ export default function PlayerCard({playerInfo}: PlayerCardProps) {
         setmmrInfo(mmrDetails)
       }).catch((err: Error) => {
         console.log("error", err)
-        setError!(err)
+        if (error) {
+          setError!(error)
+        }
       })
 
   }, [])

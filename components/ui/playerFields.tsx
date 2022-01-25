@@ -18,6 +18,8 @@ export default function FormPropsTextFields() {
     setError,
     sbOpen,
     setSbOpen,
+    sbErrorOpen,
+    setSbErrorOpen
   } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,10 @@ export default function FormPropsTextFields() {
           setLoading(false)
         }).catch((err: Error) => {
           console.log("error", err)
-          setError!(err);
+          if (error) {
+            setError!(error);
+          }
+          setSbErrorOpen!(true)
           setLoading(false)
         })
     }

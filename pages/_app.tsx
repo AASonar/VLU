@@ -10,12 +10,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const [playerInfo, setPlayerInfoState] = useState<AccountDetails>(Object)
   const [error, setError] = useState<Error>()
-  const [isPlayerInfoValid, setIsPlayerInfoValid] = useState<boolean>(false)
-  const [sbOpen, setSbOpen] = useState<boolean>()
+  const [sbOpen, setSbOpen] = useState<boolean>(false)
+  const [sbErrorOpen, setSbErrorOpen] = useState<boolean>(false)
 
   const setPlayerInfo = (acctDetails: AccountDetails) => {
     setPlayerInfoState(acctDetails)
-    setIsPlayerInfoValid(true)
   }
 
   return (
@@ -26,7 +25,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         setError, 
         sbOpen,
         setSbOpen,
-        isPlayerInfoValid 
+        sbErrorOpen,
+        setSbErrorOpen
       }}>
       <Component {...pageProps} /> 
     </UserContext.Provider>

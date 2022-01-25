@@ -30,7 +30,9 @@ export default function BasicTable({playerInfo}: PlayerCardProps) {
         setMatchDetails(matchDetails)
        }).catch((err: Error) => {
          console.log("error", err)
-         setError!(err)
+         if (error) {
+          setError!(error)
+         }
        })
 
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */
