@@ -16,66 +16,22 @@ interface MatchTableProps {
     tag: string
   }
   
-/*
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-*/
 
-const getMatchMetaData = async (
-    key: number,
-    matchInfo: MatchDetails
-): Promise<Metadata> => {
-
-    return {
-            matchid: matchInfo[key].metadata.matchid,
-            map : matchInfo[key].metadata.map,
-            mode : matchInfo[key].metadata.mode,
-            rounds_played: matchInfo[key].metadata.rounds_played,
-            cluster: matchInfo[key].metadata.cluster
-        }
-}
-
-function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export default function BasicTable() {
-
-    const [matchInfo, setmatchInfo] = useState<MatchDetails>()
-    const [moreInfo, setmoreInfo] = useState<Metadata>()
-    let rows: any = []
+export default function BasicTable(props: MatchTableProps) {
+    const [matchDetails, setMatchDetails] = useState<MatchDetails>([]);
 
     useEffect(() => {
-  
+      
      //TODO: change region to dynamic
-     fetchMatches("ap", "Kaiserin", "9988", "3", null).then((matchDetails: MatchDetails) => {
-         setmatchInfo(matchDetails)
+     fetchMatches("ap", props.userName, props.tag, "3", null).then((matchDetails: MatchDetails) => {
+        setMatchDetails(matchDetails);
+       }).catch((err) => {
+         console.log("error", err);
        })
 
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */
-    
-    delay(300).then(() => { getMatchMetaData(0, matchInfo!).then((moreInfo: Metadata) => {
-        setmoreInfo(moreInfo)
-        })}) 
-
+ 
     },[])
-     
-    if (matchInfo) {
-        console.log(moreInfo)
-    }
-
-    if (matchInfo) {
-    rows = [
-        moreInfo!
-        ]
-    }
 
   return (
     <TableContainer component={Paper}>
@@ -90,26 +46,22 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {matchDetails.map(({metadata: {matchid, map, mode, rounds_played, cluster}}) => (
             <TableRow
-              key={row.matchid}
+              key={matchid}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {}
+              <TableCell component="th" scope="row" sx={{maxWidth: 100, overflow: "hidden", textOverflow: "ellipsis"}}>
+                {matchid}
               </TableCell>
-              <TableCell align="right">{}</TableCell>
-              <TableCell align="right">{}</TableCell>
-              <TableCell align="right">{}</TableCell>
-              <TableCell align="right">{}</TableCell>
+              <TableCell align="right">{map}</TableCell>
+              <TableCell align="right">{mode}</TableCell>
+              <TableCell align="right">{rounds_played}</TableCell>
+              <TableCell align="right">{cluster}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
-}
-
-function timeout(arg0: () => void, timeout: any) {
-    throw new Error('Function not implemented.');
 }

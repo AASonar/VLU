@@ -11,10 +11,13 @@ const fetchMatches = async (
     ) : Promise<MatchDetails> => {
 
     const response = await ValorantAPI.getMatches(region, name, tag, size, mode, map)
-    const { data }  = await response
-    //console.log(data)
-    return data
+    const { data }  = response
 
+    if(response.status === 200) {
+        return data;
+    }
+
+    return Promise.reject(response);
 }
 
 export default fetchMatches
