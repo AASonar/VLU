@@ -10,23 +10,22 @@ import { MatchDetails, Metadata } from '../valorantAPI/types/matchDetails';
 import { useEffect, useState } from 'react';
 import { fetchMatches } from '../valorantAPI';
 import fetchMatch from '../valorantAPI/fetchMatch/fetchMatch';
+import { PlayerCardProps } from '../valorantAPI/types/accDetails';
 
-interface MatchTableProps {
-    userName: string,
-    tag: string
-  }
-  
+export default function BasicTable({playerInfo}: PlayerCardProps) {
 
-export default function BasicTable(props: MatchTableProps) {
     const [matchDetails, setMatchDetails] = useState<MatchDetails>([]);
+    const [error, setError] = useState<Error>();
 
     useEffect(() => {
+      console.log(playerInfo);
       
      //TODO: change region to dynamic
-     fetchMatches("ap", props.userName, props.tag, "3", null).then((matchDetails: MatchDetails) => {
-        setMatchDetails(matchDetails);
-       }).catch((err) => {
-         console.log("error", err);
+     fetchMatches("ap", playerInfo?.name, playerInfo?.tag, "3", null).then((matchDetails: MatchDetails) => {
+        setMatchDetails(matchDetails)
+       }).catch((err: Error) => {
+         console.log("error", err)
+         setError(err)
        })
 
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */

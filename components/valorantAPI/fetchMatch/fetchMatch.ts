@@ -8,7 +8,11 @@ const fetchMatch = async (
     const response = await ValorantAPI.getMatch(matchId)
     const { data }  = await response
     //console.log(data)
-    return data
+    if(response.status === 200) {
+        return data;
+    }
+
+    return Promise.reject(response);
 }
 
 export default fetchMatch

@@ -5,7 +5,9 @@ type Card = {
     large: string
     wide: string
 }
-
+export interface PlayerCardProps {
+    playerInfo : AccountDetails
+  }
 export interface AccountDetails {
     name: string,
     region: string,

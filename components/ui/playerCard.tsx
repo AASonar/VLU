@@ -10,33 +10,27 @@ import "@fontsource/roboto/400.css";
 import fetchMMR from "../valorantAPI/fetchMMR/fetchMMR";
 import { List } from "@mui/material";
 import { MMRDetails } from "../valorantAPI/types/mmrDetails";
-import { AccountDetails } from "../valorantAPI/types/accDetails";
+import { AccountDetails, PlayerCardProps } from "../valorantAPI/types/accDetails";
+import useContext from 'react';
 
-interface PlayerCardProps {
-  userName: string;
-  tag: string;
-}
 
-export default function PlayerCard(props: PlayerCardProps) {
-  const accInfo = [props.userName, props.tag];
+export default function PlayerCard({playerInfo}: PlayerCardProps) {
 
-  const [playerInfo, setplayerInfo] = useState<AccountDetails>();
   const [mmrInfo, setmmrInfo] = useState<MMRDetails>();
+  const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    fetchAccount(accInfo[0], accInfo[1]).then(
-      (accountDetails: AccountDetails) => {
-        setplayerInfo(accountDetails);
-      }
-    );
-
+    
     //TODO: change region to dynamic
-    fetchMMR("v1", "ap", accInfo[0], accInfo[1]).then(
+    fetchMMR("v1", "ap", playerInfo?.name, playerInfo?.tag).then(
       (mmrDetails: MMRDetails) => {
-        setmmrInfo(mmrDetails);
-      }
-    );
-  }, []);
+        setmmrInfo(mmrDetails)
+      }).catch((err: Error) => {
+        console.log("error", err)
+        setError(err)
+      })
+
+  }, [])
 
   const card = playerInfo?.card?.large;
 
@@ -62,7 +56,9 @@ export default function PlayerCard(props: PlayerCardProps) {
               <ListItemText>Rank: {mmrInfo?.currenttierpatched}</ListItemText>
               <ListItemText>
                 Elo: {mmrInfo?.elo} (
-<Typography display="inline" color={mmrInfo?.mmr_change_to_last_game && mmrInfo?.mmr_change_to_last_game < 0 ? "red" : "green"}>{mmrInfo?.mmr_change_to_last_game}</Typography>)
+                <Typography display="inline" color= {
+                  mmrInfo?.mmr_change_to_last_game && mmrInfo?.mmr_change_to_last_game < 0 ? "red" : "green"}>{
+                  mmrInfo?.mmr_change_to_last_game}</Typography>)
               </ListItemText>
             </List>
           </Typography>

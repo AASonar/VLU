@@ -5,8 +5,12 @@ const fetchAccount = async (name: string, tag: string): Promise<AccountDetails> 
 
         const response = await ValorantAPI.getAccount(name, tag)
         const { data }  = await response
-        //console.log(data)
-        return data
+        
+        if(response.status === 200) {
+                return data;
+        }
+        
+        return Promise.reject(response);
 
 }
 
