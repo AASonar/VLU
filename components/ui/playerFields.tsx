@@ -31,23 +31,22 @@ export default function FormPropsTextFields() {
         (accountDetails: AccountDetails) => {
           setPlayerInfo!(accountDetails)
           setSbOpen!(true)
+          setLoading(false)
         }).catch((err: Error) => {
           console.log("error", err)
           setError!(err);
+          setLoading(false)
         })
     }
   }
 
   const handleChangeName = (event:any) => {
     setUserName(event.target.value)
-    setLoading(false);
   }
 
   const handleChangeTag = (event:any) => {
     setUserTag(event.target.value)
-    setLoading(false);
   }
-
 
   return (
     

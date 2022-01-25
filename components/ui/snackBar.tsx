@@ -21,16 +21,7 @@ const {
     
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen(true)
-  };
-
-  const handleValidPlayerInfo= () => {
-    if (isPlayerInfoValid) {
-        return setOpen(true)
-    }
-  };
-
+ 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
