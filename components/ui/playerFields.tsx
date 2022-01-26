@@ -52,7 +52,7 @@ export default function FormPropsTextFields() {
 
   return (
     
-      <Grid container spacing={3}
+      <Grid container spacing={2}
       component="form"
       noValidate
       autoComplete="off" 
@@ -60,37 +60,37 @@ export default function FormPropsTextFields() {
         '& .MuiTextField-root': { marginBottom: 1},
       }}
       >
-        <Grid item xs={1.9}>
+        <Grid item xs>
           <TextField
             required
             id="outlined-required"
             label="Player Name"
             value={userName}
             onChange={handleChangeName}
-            sx={{ width: '21ch' }}
+            sx={{ width: '22ch'}}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs>
         <TextField
           required
           label="Player Tag"
           value={userTag}
           onChange={handleChangeTag}
           id="outlined-start-adornment"
-          sx={{ width: '13ch' }}
+          sx={{ width: '12ch' }}
           InputProps={{
             startAdornment: <InputAdornment position="start">#</InputAdornment>,
           }}
         />
         </Grid>
-          <Grid item xs={10}>
+          <Grid item xs>
           <LoadingButton
             onClick={handleClick}
             endIcon={<SendIcon />}
             loading={loading}
             loadingPosition="end"
             variant="contained"
-            sx={{ width: '38ch', height: '7ch', marginTop: -3, marginBottom: 1}}
+            sx={{ width: '39.5ch', height: '7ch', marginTop: -2, marginBottom: 1}}
           >
           Find Player
         </LoadingButton>

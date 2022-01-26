@@ -1,1 +1,1 @@
-export const ValorantAPI = require("unofficial-valorant-api")
+export const ValorantAPI = require("unofficial-valorant-api");

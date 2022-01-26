@@ -1,1 +1,1 @@
-export { default } from "./fetchMMR"
+export { default } from "./fetchMMR";

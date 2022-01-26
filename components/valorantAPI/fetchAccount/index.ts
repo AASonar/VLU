@@ -1,2 +1,1 @@
-
-export { default } from "./fetchAccount"
+export { default } from "./fetchAccount";

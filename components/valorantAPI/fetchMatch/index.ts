@@ -1,1 +1,1 @@
-export { default } from "./fetchMatch"
+export { default } from "./fetchMatch";

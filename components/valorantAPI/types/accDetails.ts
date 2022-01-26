@@ -1,22 +1,22 @@
-
 type Card = {
-    id: string
-    small: string
-    large: string
-    wide: string
-}
+  id: string;
+  small: string;
+  large: string;
+  wide: string;
+};
 
 export interface UserInfo {
-    name: string,
-    tag: string
+  region?: string;
+  name: string;
+  tag: string;
 }
 export interface PlayerCardProps {
-    playerInfo : AccountDetails
-  }
+  playerInfo: AccountDetails;
+}
 export interface AccountDetails {
-    name: string,
-    region: string,
-    tag: string,
-    account_level: number
-    card: Card
+  name: string;
+  region: string;
+  tag: string;
+  account_level: number;
+  card: Card;
 }

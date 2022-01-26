@@ -11,36 +11,30 @@ import { MMRDetails } from "../valorantAPI/types/mmrDetails";
 import { PlayerCardProps } from "../valorantAPI/types/accDetails";
 import { UserContext } from "../UserContext";
 
-
-export default function PlayerCard({playerInfo}: PlayerCardProps) {
-
-  const { 
-    error, 
-    setError,
-  } = useContext(UserContext);
+export default function PlayerCard({ playerInfo }: PlayerCardProps) {
+  const { error, setError } = useContext(UserContext);
 
   const [mmrInfo, setmmrInfo] = useState<MMRDetails>();
-  
-  useEffect(() => {
-    
-    //TODO: change region to dynamic
-    fetchMMR("v1", "ap", playerInfo?.name, playerInfo?.tag).then(
-      (mmrDetails: MMRDetails) => {
-        setmmrInfo(mmrDetails)
-      }).catch((err: Error) => {
-        setError!(err)
-      })
 
-  }, [playerInfo, setError])
+  useEffect(() => {
+    //TODO: change region to dynamic
+    fetchMMR("v1", playerInfo?.region, playerInfo?.name, playerInfo?.tag)
+      .then((mmrDetails: MMRDetails) => {
+        setmmrInfo(mmrDetails);
+      })
+      .catch((err: Error) => {
+        setError!(err);
+      });
+  }, [playerInfo, setError]);
 
   const card = playerInfo?.card?.large;
 
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ maxWidth: 310 }}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="400"
+          height="500"
           image={card}
           alt="player card picture"
         />
@@ -57,9 +51,18 @@ export default function PlayerCard({playerInfo}: PlayerCardProps) {
               <ListItemText>Rank: {mmrInfo?.currenttierpatched}</ListItemText>
               <ListItemText>
                 Elo: {mmrInfo?.elo} (
-                <Typography display="inline" color= {
-                  mmrInfo?.mmr_change_to_last_game && mmrInfo?.mmr_change_to_last_game < 0 ? "red" : "green"}>{
-                  mmrInfo?.mmr_change_to_last_game}</Typography>)
+                <Typography
+                  display="inline"
+                  color={
+                    mmrInfo?.mmr_change_to_last_game &&
+                    mmrInfo?.mmr_change_to_last_game < 0
+                      ? "red"
+                      : "green"
+                  }
+                >
+                  {mmrInfo?.mmr_change_to_last_game}
+                </Typography>
+                )
               </ListItemText>
             </List>
           </Typography>
