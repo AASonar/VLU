@@ -4,13 +4,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, ListItem, ListItemText } from "@mui/material";
 import React, { useEffect, useState, useContext } from "react";
-import fetchAccount from "../valorantAPI/fetchAccount/fetchAccount";
-import { fetchMatches } from "../valorantAPI";
 import "@fontsource/roboto/400.css";
 import fetchMMR from "../valorantAPI/fetchMMR/fetchMMR";
 import { List } from "@mui/material";
 import { MMRDetails } from "../valorantAPI/types/mmrDetails";
-import { AccountDetails, PlayerCardProps } from "../valorantAPI/types/accDetails";
+import { PlayerCardProps } from "../valorantAPI/types/accDetails";
 import { UserContext } from "../UserContext";
 
 
@@ -30,10 +28,7 @@ export default function PlayerCard({playerInfo}: PlayerCardProps) {
       (mmrDetails: MMRDetails) => {
         setmmrInfo(mmrDetails)
       }).catch((err: Error) => {
-        console.log("error", err)
-        if (error) {
-          setError!(error)
-        }
+        setError!(err)
       })
 
   }, [])

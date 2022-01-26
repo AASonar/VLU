@@ -15,6 +15,13 @@ type PlayerStats = {
     score: number
 }
 
+type PlayerAssetAgent = {
+    agent: {
+        small: string
+    }
+}
+
+
 type PlayerData = {
     name: string,
     tag: string,
@@ -22,9 +29,11 @@ type PlayerData = {
     team: string,
     currenttier_patched: string,
     stats: PlayerStats
+    assets: PlayerAssetAgent
 }
 
 type Players = {
+    all_players: PlayerData[],
     blue: PlayerData[],
     red: PlayerData[]
 }

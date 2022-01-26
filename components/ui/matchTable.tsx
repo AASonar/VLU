@@ -6,19 +6,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { MatchDetails, Metadata } from '../valorantAPI/types/matchDetails';
+import { MatchDetails, MatchDetailsData, Metadata } from '../valorantAPI/types/matchDetails';
 import { useEffect, useState, useContext } from 'react';
 import { fetchMatches } from '../valorantAPI';
 import fetchMatch from '../valorantAPI/fetchMatch/fetchMatch';
 import { PlayerCardProps } from '../valorantAPI/types/accDetails';
-import { UserContext } from '../UserContext';
+import { MatchContext, UserContext } from '../UserContext';
 
 export default function BasicTable({playerInfo}: PlayerCardProps) {
 
-    const { 
-      error, 
-      setError,
-    } = useContext(UserContext);
+    const { setError } = useContext(UserContext);
+    const { matchID, setMatchID } = useContext(MatchContext)
 
     const [matchDetails, setMatchDetails] = useState<MatchDetails>([]);
 
@@ -26,19 +24,30 @@ export default function BasicTable({playerInfo}: PlayerCardProps) {
       console.log(playerInfo);
       
      //TODO: change region to dynamic
-     fetchMatches("ap", playerInfo?.name, playerInfo?.tag, "3", null).then((matchDetails: MatchDetails) => {
+     fetchMatches("ap", playerInfo?.name, playerInfo?.tag).then((matchDetails: MatchDetails) => {
+        console.log(matchDetails)
         setMatchDetails(matchDetails)
        }).catch((err: Error) => {
-         console.log("error", err)
-         if (error) {
-          setError!(error)
-         }
+          setError!(err)
+
        })
 
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */
  
     },[])
 
+
+    function handleClick(matchid:string) {
+      setMatchID!(matchid)
+      if(matchID) {
+        fetchMatch(matchID).then((matchDetailsData:MatchDetailsData) => {
+          console.log(matchDetailsData)
+          
+        })
+        //fetchMatch(matchID)
+    }
+    }
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -55,9 +64,12 @@ export default function BasicTable({playerInfo}: PlayerCardProps) {
           {matchDetails.map(({metadata: {matchid, map, mode, rounds_played, cluster}}) => (
             <TableRow
               key={matchid}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              onClick={() => {handleClick(matchid)}}
+              hover={true}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 }, 
+                    '&:hover': {cursor: 'pointer'}, }}
             >
-              <TableCell component="th" scope="row" 
+              <TableCell component="th" scope="row"
               sx={{maxWidth: 100, overflow: "hidden", textOverflow: "ellipsis"}}>
                 {matchid}
               </TableCell>

@@ -46,7 +46,8 @@ const {
       
      <Snackbar open={sbErrorOpen} autoHideDuration={5000} onClose={handleClose}>
          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-          Encountered error: {JSON.stringify(error)}
+           {/* {console.log(error)} */}
+          Encountered error: {error?.message}
         </Alert>
       </Snackbar> 
 

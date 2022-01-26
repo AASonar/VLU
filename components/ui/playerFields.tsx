@@ -27,18 +27,15 @@ export default function FormPropsTextFields() {
   const [userTag, setUserTag] = useState<string>()
 
   function handleClick() {
-    setLoading(true);
     if(userName && userTag){
+      setLoading(true);
       fetchAccount(userName, userTag).then(
         (accountDetails: AccountDetails) => {
           setPlayerInfo!(accountDetails)
           setSbOpen!(true)
           setLoading(false)
         }).catch((err: Error) => {
-          console.log("error", err)
-          if (error) {
-            setError!(error);
-          }
+          setError!(err);
           setSbErrorOpen!(true)
           setLoading(false)
         })

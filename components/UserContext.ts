@@ -13,3 +13,10 @@ interface UserContextProps  {
 }
 
 export const UserContext = createContext<UserContextProps>({});
+
+interface MatchContextProps {
+  matchID?: string,
+  setMatchID?(matchID: string): void
+}
+
+export const MatchContext = createContext<MatchContextProps>({});
