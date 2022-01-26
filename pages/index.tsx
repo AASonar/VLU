@@ -21,24 +21,24 @@ const Home: NextPage = () => {
 
   const [matchID, setMatchID] = useState<string>();
 
+  const containerRef = React.useRef(null);
+
   return (
     <main className={styles.main}>
       <MatchContext.Provider value={{ matchID, setMatchID }}>
         <Container>
           <SnackBar />
           <Grid container spacing={1}>
-            <Grid item xs={3.5}>
+            <Grid item xs={3.5} ref={containerRef}>
               <PlayerFields />
-              {playerInfo && <PlayerCard playerInfo={playerInfo} />}
+              {playerInfo?.name && <PlayerCard playerInfo={playerInfo} />}
             </Grid>
             <Grid item xs={8}>
-              <Grid item xs>
-                {" "}
-                {playerInfo && <MatchTable playerInfo={playerInfo} />}{" "}
+              <Grid item xs marginBottom={2}>
+                {playerInfo?.name && <MatchTable playerInfo={playerInfo} />}
               </Grid>
               <Grid item xs>
-                {" "}
-                {matchID && <ExtendedMatchTable />}{" "}
+                {matchID && <ExtendedMatchTable />}
               </Grid>
             </Grid>
           </Grid>
