@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import React, { useContext, useState } from "react";
 import PlayerCard from "../components/ui/playerCard";
 import { Container, Grid } from "@mui/material";
-import { ExtendedMatchTable, extendedMatchTable, MatchTable, MatchTable2, PlayerFields, SnackBar } from "../components/ui";
+import { ExtendedMatchTable, MatchTable, MatchTable2, PlayerFields, SnackBar } from "../components/ui";
 import { MatchContext, UserContext } from "../components/UserContext";
 
 const Home: NextPage = () => {
