@@ -4,8 +4,8 @@ import { AccountDetails, UserInfo } from "./valorantAPI/types/accDetails";
 interface UserContextProps  {
   playerInfo?: AccountDetails
   setPlayerInfo?(acctDetails: AccountDetails): void
-  error?: Error
-  setError?(error:Error): void
+  error?: any
+  setError?(error:any): void
   sbOpen?: boolean
   setSbOpen?(sbOpen:boolean): void
   sbErrorOpen?: boolean

@@ -21,6 +21,9 @@ export default function BasicTable({playerInfo}: PlayerCardProps) {
     const [matchDetails, setMatchDetails] = useState<MatchDetails>([]);
 
     useEffect(() => {
+      if(!playerInfo?.name) {
+        return;
+      }
       console.log(playerInfo);
       
      //TODO: change region to dynamic
@@ -34,7 +37,7 @@ export default function BasicTable({playerInfo}: PlayerCardProps) {
 
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */
  
-    },[])
+    },[playerInfo, setError])
 
 
     function handleClick(matchid:string) {

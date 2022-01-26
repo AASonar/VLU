@@ -31,7 +31,7 @@ export default function PlayerCard({playerInfo}: PlayerCardProps) {
         setError!(err)
       })
 
-  }, [])
+  }, [playerInfo, setError])
 
   const card = playerInfo?.card?.large;
 

@@ -13,7 +13,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 export default function CustomizedSnackbars() {
 
 const { 
-    error, 
+    error,
+    setError, 
     sbOpen,
     setSbOpen,
     sbErrorOpen,
@@ -46,8 +47,7 @@ const {
       
      <Snackbar open={sbErrorOpen} autoHideDuration={5000} onClose={handleClose}>
          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-           {/* {console.log(error)} */}
-          Encountered error: {error?.message}
+          Encountered error: {error?.data.message}
         </Alert>
       </Snackbar> 
 
