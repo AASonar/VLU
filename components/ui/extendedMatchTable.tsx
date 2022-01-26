@@ -74,7 +74,7 @@ export default function BasicTable() {
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
                   "&:hover": { cursor: "pointer" },
-                  //bgcolor: team === "Blue" ? "light-blue" : "red",
+                  bgcolor: team === "Blue" ? "#e3f2fd" : "#ffebee",
                 }}
               >
                 <TableCell component="th" scope="row">

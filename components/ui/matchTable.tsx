@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import {
   MatchDetails,
   MatchDetailsData,
-  Metadata,
 } from "../valorantAPI/types/matchDetails";
 import { useEffect, useState, useContext } from "react";
 import { fetchMatches } from "../valorantAPI";

@@ -2,7 +2,7 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import { Grid, InputAdornment } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { AccountDetails, UserInfo } from "../valorantAPI/types/accDetails";
+import { AccountDetails } from "../valorantAPI/types/accDetails";
 import { UserContext } from "../UserContext";
 import { fetchAccount } from "../valorantAPI";
 
@@ -92,7 +92,7 @@ export default function FormPropsTextFields() {
           loadingPosition="end"
           variant="contained"
           sx={{
-            width: "39.5ch",
+            width: "39.3ch",
             height: "7ch",
             marginTop: -2,
             marginBottom: 1,
