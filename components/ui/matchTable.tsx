@@ -11,12 +11,14 @@ import {
   MatchDetailsData,
 } from "../valorantAPI/types/matchDetails";
 import { useEffect, useState, useContext } from "react";
-import { fetchMatches } from "../valorantAPI";
+import { fetchContent, fetchMatches } from "../valorantAPI";
 import fetchMatch from "../valorantAPI/fetchMatch/fetchMatch";
 import { PlayerCardProps } from "../valorantAPI/types/accDetails";
 import { MatchContext, UserContext } from "../UserContext";
 import { Accordion, AccordionSummary, Typography, Slide } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ContentDetails } from "../valorantAPI/types/contentDetails";
+import { mapsEnum } from "../valorantAPI/enums/mapsEnum";
 
 export default function BasicTable({ playerInfo }: PlayerCardProps) {
   const { setError } = useContext(UserContext);
@@ -24,17 +26,18 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
 
   const [matchDetails, setMatchDetails] = useState<MatchDetails>([]);
   const [expanded, setExpanded] = useState<boolean>(false);
+  const [valContent, setValContent] = useState<ContentDetails>();
 
   useEffect(() => {
     if (!playerInfo?.name) {
       return;
     }
-    console.log(playerInfo);
+    //console.log(playerInfo);
 
     //TODO: change region to dynamic
     fetchMatches(playerInfo?.region, playerInfo?.name, playerInfo?.tag)
       .then((matchDetails: MatchDetails) => {
-        console.log(matchDetails);
+        //console.log(matchDetails);
         setMatchDetails(matchDetails);
         setExpanded(true);
       })
@@ -42,6 +45,13 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
         setError!(err);
       });
 
+    fetchContent().then((content: ContentDetails) => {
+      setValContent(content);
+    });
+
+    if (valContent) {
+      console.log(valContent.maps);
+    }
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */
   }, [playerInfo, setError]);
 
@@ -49,7 +59,7 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
     setMatchID!(matchid);
     if (matchID) {
       fetchMatch(matchID).then((matchDetailsData: MatchDetailsData) => {
-        console.log(matchDetailsData);
+        //console.log(matchDetailsData);
       });
       //fetchMatch(matchID)
     }
@@ -106,7 +116,7 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
                         textOverflow: "ellipsis",
                       }}
                     >
-                      {matchid}
+                      {mapsEnum.Ascent}
                     </TableCell>
                     <TableCell align="right">{map}</TableCell>
                     <TableCell align="right">{mode}</TableCell>

@@ -10,6 +10,7 @@ import { List } from "@mui/material";
 import { MMRDetails } from "../valorantAPI/types/mmrDetails";
 import { PlayerCardProps } from "../valorantAPI/types/accDetails";
 import { UserContext } from "../UserContext";
+import { fetchContent } from "../valorantAPI";
 
 export default function PlayerCard({ playerInfo }: PlayerCardProps) {
   const { error, setError } = useContext(UserContext);

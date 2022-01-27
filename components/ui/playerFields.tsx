@@ -4,7 +4,7 @@ import { Grid, InputAdornment } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { AccountDetails } from "../valorantAPI/types/accDetails";
 import { UserContext } from "../UserContext";
-import { fetchAccount } from "../valorantAPI";
+import { fetchAccount, fetchContent } from "../valorantAPI";
 
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
