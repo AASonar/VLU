@@ -18,7 +18,8 @@ import { MatchContext, UserContext } from "../UserContext";
 import { Accordion, AccordionSummary, Typography, Slide } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ContentDetails } from "../valorantAPI/types/contentDetails";
-import { mapsEnum } from "../valorantAPI/enums/mapsEnum";
+import { mapsList, mapSelector } from "../valorantAPI/enums/mapsEnum";
+import Image from "next/image";
 
 export default function BasicTable({ playerInfo }: PlayerCardProps) {
   const { setError } = useContext(UserContext);
@@ -26,7 +27,6 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
 
   const [matchDetails, setMatchDetails] = useState<MatchDetails>([]);
   const [expanded, setExpanded] = useState<boolean>(false);
-  const [valContent, setValContent] = useState<ContentDetails>();
 
   useEffect(() => {
     if (!playerInfo?.name) {
@@ -45,13 +45,6 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
         setError!(err);
       });
 
-    fetchContent().then((content: ContentDetails) => {
-      setValContent(content);
-    });
-
-    if (valContent) {
-      console.log(valContent.maps);
-    }
     /*fetchMatch("5bd043d9-b79b-4685-8acd-37ed28521e1b") */
   }, [playerInfo, setError]);
 
@@ -111,12 +104,20 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
                       component="th"
                       scope="row"
                       sx={{
-                        maxWidth: 100,
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
+                        maxWidth: 200,
+                        m: 0,
+                        padding: 0,
                       }}
                     >
-                      {mapsEnum.Ascent}
+                      <Image
+                        src={`https://media.valorant-api.com/maps/${mapSelector(
+                          map
+                        )}/listviewicon.png`}
+                        alt="character icon"
+                        width="456"
+                        height="100"
+                      />
+                      {/* {mapSelector(map)} */}
                     </TableCell>
                     <TableCell align="right">{map} </TableCell>
                     <TableCell align="right">{mode}</TableCell>
