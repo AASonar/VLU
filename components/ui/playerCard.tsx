@@ -46,13 +46,15 @@ export default function PlayerCard({ playerInfo }: PlayerCardProps) {
             </Typography>
             <Typography variant="body2" color="text.secondary">
               <List>
-                <ListItemText>Region: {playerInfo?.region}</ListItemText>
+                <ListItemText>🧭 Region: {playerInfo?.region}</ListItemText>
                 <ListItemText>
-                  Account Level: {playerInfo?.account_level}
+                  🌯 Account Level: {playerInfo?.account_level}
                 </ListItemText>
-                <ListItemText>Rank: {mmrInfo?.currenttierpatched}</ListItemText>
                 <ListItemText>
-                  Elo: {mmrInfo?.elo} (
+                  👑 Rank: {mmrInfo?.currenttierpatched}
+                </ListItemText>
+                <ListItemText>
+                  🔢 Elo: {mmrInfo?.elo} (
                   <Typography
                     display="inline"
                     color={

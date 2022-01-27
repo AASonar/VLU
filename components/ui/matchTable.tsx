@@ -118,7 +118,7 @@ export default function BasicTable({ playerInfo }: PlayerCardProps) {
                     >
                       {mapsEnum.Ascent}
                     </TableCell>
-                    <TableCell align="right">{map}</TableCell>
+                    <TableCell align="right">{map} </TableCell>
                     <TableCell align="right">{mode}</TableCell>
                     <TableCell align="right">{rounds_played}</TableCell>
                     <TableCell align="right">{cluster}</TableCell>

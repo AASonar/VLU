@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useContext, useState } from "react";
 import PlayerCard from "../components/ui/playerCard";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import {
   ExtendedMatchTable,
   MatchTable,
