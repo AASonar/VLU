@@ -18,7 +18,7 @@ import { MatchContext, UserContext } from "../UserContext";
 import { Accordion, AccordionSummary, Typography, Slide } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ContentDetails } from "../valorantAPI/types/contentDetails";
-import { mapsList, mapSelector } from "../valorantAPI/enums/mapsEnum";
+import { mapsRecord, mapSelector } from "../valorantAPI/records/mapsRecord";
 import Image from "next/image";
 
 export default function BasicTable({ playerInfo }: PlayerCardProps) {
