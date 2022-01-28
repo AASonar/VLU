@@ -1,4 +1,4 @@
-export const mapsList = {
+export const mapsList: Record<string, string> = {
   //To be photos like https://media.valorant-api.com/maps/2C9D57EC-4431-9C5E-2939-8F9EF6DD5CBA/listviewicon.png or
   // /splash.png
   Ascent: "7EAECC1B-4337-BBF6-6AB9-04B8F06B3319",
@@ -11,5 +11,5 @@ export const mapsList = {
 };
 
 export function mapSelector(mapData: string) {
-  return mapsList["Ascent"];
+  return mapsList[mapData];
 }
